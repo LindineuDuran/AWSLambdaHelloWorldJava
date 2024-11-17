@@ -1,0 +1,11 @@
+services:
+  localstack:
+    image: localstack/localstack:latest
+    container_name: local-aws-services
+    environment:
+      - DEBUG=${DEBUG:-0}
+    ports:
+      - '4566-4597:4566-4597'
+    volumes:
+      - "./.localstack:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock" 

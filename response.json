@@ -1,0 +1,1 @@
+{"statusCode":200,"headers":{"Content-Type":"application/json"},"body":"{ message: Livro Criado, location: 189.68.4.22, httpMethod: POST, path: /book}"}
