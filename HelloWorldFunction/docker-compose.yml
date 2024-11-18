@@ -7,5 +7,5 @@ services:
     ports:
       - '4566-4597:4566-4597'
     volumes:
-      - "./.localstack:/var/lib/localstack"
+      - "/.localstack:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock" 
