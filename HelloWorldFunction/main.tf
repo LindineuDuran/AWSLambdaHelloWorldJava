@@ -16,8 +16,9 @@ provider "aws" {
   skip_requesting_account_id  = true
   endpoints {
     iam         = "http://localhost:4566"
-    lambda      = "http://localhost:4566"
-    apigateway  = "http://localhost:4566"
+    dynamodb   = "http://localhost:4566"
+    lambda     = "http://localhost:4566"
+    apigateway = "http://localhost:4566"
   }
 }
 
