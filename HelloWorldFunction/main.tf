@@ -43,6 +43,19 @@ resource "aws_iam_role_policy_attachment" "lambda_basic_policy_attachment" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
+# DynamoDB Table
+resource "aws_dynamodb_table" "books" {
+  name           = "Books"
+  hash_key       = "id"
+
+  attribute {
+    name = "id"
+    type = "S"
+  }
+
+  billing_mode = "PAY_PER_REQUEST"
+}
+
 resource "aws_lambda_function" "book_function" {
   function_name    = "BookFunction"
   handler          = "bookfunction.controller.BookFunction::handleRequest"
@@ -52,6 +65,12 @@ resource "aws_lambda_function" "book_function" {
   filename         = "target/HelloWorld-1.0.jar" # Caminho para o JAR
   source_code_hash = filebase64sha256("target/HelloWorld-1.0.jar")
   role             = aws_iam_role.lambda_execution_role.arn
+
+  environment {
+    variables = {
+      TABLE_NAME = aws_dynamodb_table.books.name
+    }
+  }
 }
 
 resource "aws_api_gateway_rest_api" "book_api" {
